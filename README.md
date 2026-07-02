@@ -75,8 +75,8 @@ real consequences, all handled:
    client-side (`supabase.auth.getSession()` in a `useEffect`) and
    redirects to `/portal` if there isn't one, instead of a server-side
    redirect.
-3. **`basePath: "/GITA"` in production.** GitHub Pages serves this repo
-   at `pareekpiyush97.github.io/GITA/`, not the domain root, so
+3. **`basePath: "/gita"` in production.** GitHub Pages serves this repo
+   at `pareekpiyush97.github.io/gita/`, not the domain root, so
    `next.config.js` sets `basePath`/`assetPrefix` whenever the
    `GITHUB_PAGES=true` build-time env var is set (only the Actions
    workflow sets it — local dev and any other host still run at `/`).
@@ -184,9 +184,9 @@ GITHUB_PAGES=true npx next build     # ✅ passes — static export to ./out, al
 
 This has been verified end-to-end on this machine, including serving the
 actual contents of `./out` from a local static file server mounted under a
-`/GITA` subpath (mirroring exactly how GitHub Pages serves a project
+`/gita` subpath (mirroring exactly how GitHub Pages serves a project
 site) and confirming every route resolves, assets load with the correct
-`/GITA/_next/...` prefix, and client-side `<Link>` navigation works.
+`/gita/_next/...` prefix, and client-side `<Link>` navigation works.
 
 If you run `next build` while a `next dev` server is already running
 against the same `.next` folder, delete `.next` before restarting the dev
@@ -224,7 +224,7 @@ and components broken out per section like `components/home/`.
 1. **Create the Supabase project** at supabase.com, then open the SQL
    editor and run `supabase/schema.sql` top to bottom.
 2. **Add two repo secrets** at
-   `github.com/pareekpiyush97/GITA/settings/secrets/actions`:
+   `github.com/pareekpiyush97/gita/settings/secrets/actions`:
    - `NEXT_PUBLIC_SUPABASE_URL`
    - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
 
@@ -234,12 +234,12 @@ and components broken out per section like `components/home/`.
    only because they're build-time env vars, not because they're sensitive
    in the way the service role key is.
 3. **One-time repo setting**: go to
-   `github.com/pareekpiyush97/GITA/settings/pages` and set **Source** to
+   `github.com/pareekpiyush97/gita/settings/pages` and set **Source** to
    **GitHub Actions** (not "Deploy from a branch"). This only needs doing
    once, ever.
 4. **That's it** — every push to `main` now triggers
    `.github/workflows/deploy.yml`, which builds the static export and
-   publishes it to **https://pareekpiyush97.github.io/GITA/**. Check the
+   publishes it to **https://pareekpiyush97.github.io/gita/**. Check the
    Actions tab on the repo to watch a deploy or see why one failed.
 5. **Local dev**: `npm install && npm run dev` → http://localhost:3000
    (no basePath locally — `GITHUB_PAGES` is only set by the Actions
@@ -250,7 +250,7 @@ and components broken out per section like `components/home/`.
    columns.
 7. **Custom domain**: add a `CNAME` file to `public/` with your domain,
    set `basePath`/`assetPrefix` to `""` in `next.config.js` (a project
-   page needs the `/GITA` prefix; a custom domain at the root doesn't),
+   page needs the `/gita` prefix; a custom domain at the root doesn't),
    and point your domain's DNS at GitHub Pages per their docs.
 
 ## Security notes

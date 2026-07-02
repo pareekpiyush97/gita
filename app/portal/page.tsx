@@ -24,7 +24,13 @@ export default function PortalLoginPage() {
 
           <LoginForm />
 
-          <p className="mt-6 text-center text-sm text-ink-600">
+          <p className="mt-4 text-center text-sm">
+            <Link href="/portal/forgot-password" className="font-medium text-emerald-600 hover:text-emerald-700">
+              Forgot your password?
+            </Link>
+          </p>
+
+          <p className="mt-4 text-center text-sm text-ink-600">
             Not a member yet?{" "}
             <Link href="/membership" className="font-medium text-emerald-600 hover:text-emerald-700">
               Apply for membership

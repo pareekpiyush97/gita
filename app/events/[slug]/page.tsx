@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CalendarDays, MapPin, IndianRupee, Users, ArrowLeft } from "lucide-react";
 import { Container } from "@/components/ui/Container";
@@ -44,10 +45,10 @@ export default function EventDetailPage({ params }: { params: { slug: string } }
       <section className="relative overflow-hidden bg-navy-950 py-16">
         <div className="pointer-events-none absolute inset-0 bg-noise" />
         <Container className="relative">
-          <a href="/events" className="inline-flex items-center gap-1.5 text-sm font-medium text-white/60 transition-colors hover:text-white">
+          <Link href="/events" className="inline-flex items-center gap-1.5 text-sm font-medium text-white/60 transition-colors hover:text-white">
             <ArrowLeft size={15} />
             Back to Events
-          </a>
+          </Link>
 
           <div className="mt-6 flex flex-wrap items-center gap-3">
             <span className="rounded-full bg-white/10 px-3 py-1 text-[11px] font-medium uppercase tracking-wide text-emerald-300">

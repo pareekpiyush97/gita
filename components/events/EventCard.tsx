@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { CalendarDays, MapPin, ArrowUpRight, Users } from "lucide-react";
 import type { EventItem } from "@/lib/data/mock-data";
 
@@ -43,13 +44,13 @@ export function EventCard({ event }: { event: EventItem }) {
         </div>
         <h3 className="mt-3 font-display text-lg font-semibold text-navy-900">{event.title}</h3>
         <p className="mt-2 flex-1 text-sm leading-relaxed text-ink-600">{event.excerpt}</p>
-        <a
+        <Link
           href={`/events/${event.slug}`}
           className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-emerald-600 transition-colors hover:text-emerald-700"
         >
           {isPast ? "View Recap" : "Register Now"}
           <ArrowUpRight size={16} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-        </a>
+        </Link>
       </div>
     </article>
   );

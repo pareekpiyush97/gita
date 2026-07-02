@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, Lock, Download } from "lucide-react";
 import { Container } from "@/components/ui/Container";
@@ -30,10 +31,10 @@ export default function ResourceDetailPage({ params }: { params: { slug: string 
   return (
     <div className="bg-paper pb-24 pt-36">
       <Container>
-        <a href="/resources" className="inline-flex items-center gap-1.5 text-sm font-medium text-ink-600 transition-colors hover:text-navy-900">
+        <Link href="/resources" className="inline-flex items-center gap-1.5 text-sm font-medium text-ink-600 transition-colors hover:text-navy-900">
           <ArrowLeft size={15} />
           Back to Resources
-        </a>
+        </Link>
 
         <div className="mx-auto mt-8 max-w-2xl">
           <div className="flex flex-wrap items-center gap-3">
@@ -81,7 +82,7 @@ export default function ResourceDetailPage({ params }: { params: { slug: string 
           ) : (
             <div className="mt-10 rounded-xl2 border-l-4 border-emerald-500 bg-white p-6 text-sm leading-relaxed text-ink-600 shadow-soft">
               Have a question about this {RESOURCE_TYPE_LABELS[resource.type].toLowerCase()}, or want to suggest a
-              follow-up topic? <a href="/contact" className="font-medium text-emerald-600 hover:text-emerald-700">Reach out to the GETA secretariat</a>.
+              follow-up topic? <Link href="/contact" className="font-medium text-emerald-600 hover:text-emerald-700">Reach out to the GETA secretariat</Link>.
             </div>
           )}
         </div>

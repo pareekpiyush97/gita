@@ -1,6 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { Award, Presentation, GraduationCap, PlayCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Modal } from "@/components/ui/Modal";
@@ -41,7 +43,9 @@ function GalleryTile({ item, onSelect }: { item: GalleryItem; onSelect: () => vo
   );
 }
 
-export function GalleryClient({ eventSlug }: { eventSlug?: string }) {
+export function GalleryClient() {
+  const searchParams = useSearchParams();
+  const eventSlug = searchParams.get("event") ?? undefined;
   const [category, setCategory] = useState<GalleryCategory | "all">("all");
   const [selected, setSelected] = useState<GalleryItem | null>(null);
 
@@ -64,9 +68,9 @@ export function GalleryClient({ eventSlug }: { eventSlug?: string }) {
           <p className="text-sm text-ink-700">
             Showing gallery items from <span className="font-semibold text-navy-900">{filteredEvent.title}</span>
           </p>
-          <a href="/gallery" className="text-sm font-semibold text-emerald-600 hover:text-emerald-700">
+          <Link href="/gallery" className="text-sm font-semibold text-emerald-600 hover:text-emerald-700">
             View Full Gallery
-          </a>
+          </Link>
         </div>
       )}
 
@@ -121,9 +125,9 @@ export function GalleryClient({ eventSlug }: { eventSlug?: string }) {
               {selected.eventSlug && (
                 <>
                   {" · "}
-                  <a href={`/events/${selected.eventSlug}`} className="font-medium text-emerald-600 hover:text-emerald-700">
+                  <Link href={`/events/${selected.eventSlug}`} className="font-medium text-emerald-600 hover:text-emerald-700">
                     View event
-                  </a>
+                  </Link>
                 </>
               )}
             </p>

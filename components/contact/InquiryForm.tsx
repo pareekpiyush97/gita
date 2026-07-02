@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Send, CheckCircle2, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { createClient } from "@/lib/supabase/client";
 
 const schema = z.object({
   name: z.string().trim().min(2, "Enter your full name"),
@@ -32,13 +33,24 @@ export function InquiryForm() {
 
   async function onSubmit(values: FormValues) {
     setStatus("idle");
+
+    // Honeypot — silently pretend success so bots don't learn they were caught.
+    if (values.company_website) {
+      setStatus("success");
+      reset();
+      return;
+    }
+
     try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
+      const supabase = createClient();
+      const { error } = await supabase.from("contact_submissions").insert({
+        name: values.name,
+        email: values.email,
+        phone: values.phone || null,
+        subject: values.subject || null,
+        message: values.message,
       });
-      if (!res.ok) throw new Error("Request failed");
+      if (error) throw error;
       setStatus("success");
       reset();
     } catch {

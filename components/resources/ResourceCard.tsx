@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { FileText, Download, LayoutTemplate, FlaskConical, PlayCircle, Newspaper, Lock, ArrowUpRight } from "lucide-react";
 import type { ResourceItem, ResourceType } from "@/lib/data/mock-data";
 import { RESOURCE_TYPE_LABELS } from "@/lib/data/mock-data";
@@ -19,7 +20,7 @@ export function ResourceCard({ resource }: { resource: ResourceItem }) {
   const Icon = TYPE_ICONS[resource.type];
 
   return (
-    <a
+    <Link
       href={`/resources/${resource.slug}`}
       className="group flex flex-col rounded-xl2 bg-white p-7 shadow-soft transition-all hover:-translate-y-1 hover:shadow-lift"
     >
@@ -45,6 +46,6 @@ export function ResourceCard({ resource }: { resource: ResourceItem }) {
         <span>{resource.author} · {formatDate(resource.publishedAt)}</span>
         <ArrowUpRight size={16} className="text-emerald-600 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
       </div>
-    </a>
+    </Link>
   );
 }

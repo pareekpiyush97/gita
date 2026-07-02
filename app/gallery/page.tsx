@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { Container, SectionHeading } from "@/components/ui/Container";
 import { GalleryClient } from "@/components/gallery/GalleryClient";
 
@@ -7,11 +8,7 @@ export const metadata: Metadata = {
   description: "Photos and videos from GETA events — awards, conferences and training programs across Gujarat.",
 };
 
-export default function GalleryPage({
-  searchParams,
-}: {
-  searchParams: { event?: string };
-}) {
+export default function GalleryPage() {
   return (
     <div className="bg-paper pb-24 pt-36">
       <Container>
@@ -22,7 +19,9 @@ export default function GalleryPage({
         />
 
         <div className="mt-14">
-          <GalleryClient eventSlug={searchParams.event} />
+          <Suspense fallback={null}>
+            <GalleryClient />
+          </Suspense>
         </div>
       </Container>
     </div>
